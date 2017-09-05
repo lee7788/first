@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<!-- dao,pojo,xml的映射 -->
+<generatorConfiguration>
+	
+	<!-- 引入配置文件 -->
+	<properties resource="jdbc.properties" />
+	
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+	
+		<!-- 配置内置的或者自定义的Plugin -->
+		<plugin type="cn.machine.plugin.BaseMapperGeneratorPlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+		
+		<!-- 是否产生注释 -->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!--数据库链接地址账号密码 -->
+		<!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:Mysql://localhost:3306/machine?characterEncoding=utf8"
+			userId="root" password="" /> -->
+		<jdbcConnection driverClass="${driver}" connectionURL="${url}"
+		userId="${username}" password="${password}" />
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!--生成Model类存放位置 -->
+		<javaModelGenerator targetPackage="cn.machine.pojo" targetProject="src">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!--生成映射文件存放位置 -->
+		<sqlMapGenerator targetPackage="cn.machine.mapping" targetProject="src">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!--生成Dao类存放位置 -->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="cn.machine.dao" targetProject="src">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!--生成对应表及类名 -->
+		<!-- <table tableName="product_category" domainObjectName="ProductCategory" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="company" domainObjectName="Company" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="index_picture" domainObjectName="IndexPicture" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="news" domainObjectName="News" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="news_category" domainObjectName="NewsCategory" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="product" domainObjectName="Product" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="user" domainObjectName="User" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="product_detail" domainObjectName="ProductDetail" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="contact" domainObjectName="Contact" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="culture_category" domainObjectName="CultureCategory" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"></table> -->
+		<table tableName="service" domainObjectName="Service" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"></table>
+		
+	</context>
+
+</generatorConfiguration>

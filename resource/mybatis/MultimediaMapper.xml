@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.machine.dao.MultimediaDao">
+
+
+	<!-- 查询所有 分页 -->
+	<select id="listPage" parameterType="Map" resultType="Car">
+		SELECT
+		tid,cName,cSeries,cType,gpsnavigation,locationservice,szmcolour
+		,szmcoloursize,lcdscreendisplay,bluetoothcarphone,mobilemapping
+		,vehiclenetworking,cartv,rearlcdscreen,powersupply,externaaudiointerface,
+		cd,speakerbrand,loudspeakerquantity
+		 FROM car c,type t,series s
+		WHERE c.id=t.cid AND s.id=t.sid
+		limit #{offset},#{pageSize}
+	</select>
+
+	<!-- 查询所有 分页 -->
+	<select id="listAll" resultType="Car">
+		SELECT
+		tid,cName,cSeries,cType,gpsnavigation,locationservice,szmcolour
+		,szmcoloursize,lcdscreendisplay,bluetoothcarphone,mobilemapping
+		,vehiclenetworking,cartv,rearlcdscreen,powersupply,externaaudiointerface,
+		cd,speakerbrand,loudspeakerquantity
+		 FROM car c,type t,series s
+		WHERE c.id=t.cid AND s.id=t.sid
+	</select>
+	
+
+	<select id="serchid" parameterType="int" resultType="Car">
+	   SELECT
+		tid,cName,cSeries,cType,gpsnavigation,locationservice,szmcolour
+		,szmcoloursize,lcdscreendisplay,bluetoothcarphone,mobilemapping
+		,vehiclenetworking,cartv,rearlcdscreen,powersupply,externaaudiointerface,
+		cd,speakerbrand,loudspeakerquantity
+		FROM car c,type t,series s
+		WHERE c.id=t.cid AND s.id=t.sid AND
+		tid=#{tId}
+	</select>
+	<update id="update" parameterType="Car">
+		UPDATE type SET gpsnavigation=#{gpsnavigation},locationservice=#{locationservice},szmcolour=#{szmcolour}
+		,szmcoloursize=#{szmcoloursize},lcdscreendisplay=#{lcdscreendisplay},bluetoothcarphone=#{bluetoothcarphone},mobilemapping=#{mobilemapping}
+		,vehiclenetworking=#{vehiclenetworking},cartv=#{cartv},rearlcdscreen=#{rearlcdscreen},powersupply=#{powersupply},
+		externaaudiointerface=#{externaaudiointerface},cd=#{cd},speakerbrand=#{speakerbrand},loudspeakerquantity=#{loudspeakerquantity}
+		WHERE tid=#{tId}
+	</update>
+
+
+</mapper>

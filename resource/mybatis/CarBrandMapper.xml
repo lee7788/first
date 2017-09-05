@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.machine.dao.CarBrandDao">
+
+  <!--   <resultMap id="BaseResultMap" type="cn.machine.pojo.Car">
+		<id column="cId" jdbcType="INT" property="id" />
+		<result column="cName" jdbcType="VARCHAR" property="cName" />
+		<result column="ctype" jdbcType="VARCHAR" property="ctype" />
+		<result column="cVolume" jdbcType="VARCHAR" property="cVolume" />
+		<result column="cEngine" jdbcType="VARCHAR" property="cEngine" />
+	
+	</resultMap>  -->
+
+	<!-- 验证登录 -->
+	<!-- <select id="serch" parameterType="cn.machine.pojo.Car" resultMap="BaseResultMap">
+	SELECT car.cId,car.cName,type.ctype,type.cVolume,type.cEngine,type.cOil 
+FROM car
+  LEFT JOIN TYPE
+    ON car.cId = type.cName
+WHERE ctype="A3"
+	</select>  -->
+
+    
+    <select id="listPage" parameterType="Integer" resultType="CarBrand">
+    select *from car 
+    limit #{1},#{0}
+    
+    </select>
+      <select id="listAll"  resultType="CarBrand">
+    select *from car
+    </select>
+   <insert id="add" parameterType="CarBrand">
+   insert into car (cName)values(#{cName})
+   </insert>
+   <select id="searchid"  resultType="CarBrand"  parameterType="Integer">
+    select *from car where id=#{id}
+   
+   </select>
+   <update id="update" parameterType="CarBrand">
+   update car set cName=#{cName}
+   where id=#{id}
+   </update>
+   <delete id="delete" parameterType="CarBrand">
+   delete from car where id=#{id}
+   </delete>
+   
+</mapper>

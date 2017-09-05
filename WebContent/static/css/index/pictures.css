@@ -1,0 +1,8 @@
+.turn_pic{
+	width: 100%;
+	margin: auto;
+	float: left;
+	height: 500px;
+	border: 2px solid red;
+	margin-top: 50px;
+}

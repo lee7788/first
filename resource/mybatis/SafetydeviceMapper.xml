@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.machine.dao.SafetydeviceDao">
+	<select id="listPage" parameterType="Map" resultType="Car">
+	SELECT
+	tId,cName,ctype,cSeries,
+	masterSecondarySeatAirbag,
+	frontAndRearAirbag,
+	airCurtain,
+	kneeAirbag,
+	tirePressureMonitoring,
+	notIndicated,
+	childSeatInterface,
+	absAbs,
+	brakingForceDistribution,
+	brakeAssist,
+	tractionControl,
+	carBodyControl,
+	Auxiliary,
+	ldws,
+	activeBrake,
+	nightVisionSystem,
+    fatigueDrivingTips
+	FROM TYPE t , car c, series s
+	WHERE c.id= t.cid AND s.id=t.sid
+	limit
+	#{offset},#{pageSize}
+
+	</select>
+	<select id="listAll" resultType="Car">
+		SELECT
+	tId,cName,ctype,cSeries,
+	masterSecondarySeatAirbag,
+	frontAndRearAirbag,
+	airCurtain,
+	kneeAirbag,
+	tirePressureMonitoring,
+	notIndicated,
+	childSeatInterface,
+	absAbs,
+	brakingForceDistribution,
+	brakeAssist,
+	tractionControl,
+	carBodyControl,
+	Auxiliary,
+	ldws,
+	activeBrake,
+	nightVisionSystem,
+    fatigueDrivingTips
+	FROM TYPE t , car c, series s
+	WHERE c.id= t.cid AND s.id=t.sid
+	</select>
+	<select id="serchid" resultType="Car" parameterType="Integer">
+	SELECT
+	tId,cName,ctype,cSeries,
+	masterSecondarySeatAirbag,
+	frontAndRearAirbag,
+	airCurtain,
+	kneeAirbag,
+	tirePressureMonitoring,
+	notIndicated,
+	childSeatInterface,
+	absAbs,
+	brakingForceDistribution,
+	brakeAssist,
+	tractionControl,
+	carBodyControl,
+	Auxiliary,
+	ldws,
+	activeBrake,
+	nightVisionSystem,
+    fatigueDrivingTips
+	FROM TYPE t , car c, series s
+	WHERE c.id= t.cid AND s.id=t.sid AND tId=#{tId}
+
+	</select>
+	<update id="typeupdate" parameterType="Car">
+	update type set
+	masterSecondarySeatAirbag=#{mastersecondaryseatairbag},
+	frontAndRearAirbag=#{frontandrearairbag},
+	airCurtain=#{aircurtain},
+	kneeAirbag=#{kneeairbag},
+	tirePressureMonitoring=#{tirepressuremonitoring},
+	notIndicated=#{notindicated},
+	childSeatInterface=#{childseatinterface},
+	absAbs=#{absabs},
+	brakingForceDistribution=#{brakingforcedistribution},
+	brakeAssist=#{brakeassist},
+	tractionControl=#{tractioncontrol},
+	carBodyControl=#{carbodycontrol},
+	Auxiliary=#{auxiliary},
+	ldws=#{ldws},
+	activeBrake=#{activebrake},
+	nightVisionSystem=#{nightvisionsystem},
+	fatigueDrivingTips=#{fatiguedrivingtips}
+	where tId=#{tId}
+	</update>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.machine.dao.InternalDao">
+
+
+	<!-- 查询所有 分页 -->
+	<select id="listPage" parameterType="Map" resultType="Car">
+		SELECT
+		tid,cName,cSeries,cType,leathersteeringwheel,steeringwheeladjustment,multifunctionals,
+		steeringwheelshift,steeringwheelheat,steeringwheelmemory,displayscreen,fulllcddashboard,
+		digitaldisplay,builtrecorder,activenoiserreduction,wirelesscharging
+		 FROM car c,type t,series s
+		WHERE c.id=t.cid AND s.id=t.sid
+		limit #{offset},#{pageSize}
+	</select>
+
+	<!-- 查询所有 分页 -->
+	<select id="listAll" resultType="Car">
+		SELECT
+		tid,cName,cSeries,cType,leathersteeringwheel,steeringwheeladjustment,multifunctionals,
+		steeringwheelshift,steeringwheelheat,steeringwheelmemory,displayscreen,fulllcddashboard,
+		digitaldisplay,builtrecorder,activenoiserreduction,wirelesscharging
+		 FROM car c,type t,series s
+		WHERE c.id=t.cid AND s.id=t.sid
+	</select>
+	
+
+	<select id="serchid" parameterType="int" resultType="Car">
+	   SELECT
+		tid,cName,cSeries,cType,leathersteeringwheel,steeringwheeladjustment,multifunctionals,
+		steeringwheelshift,steeringwheelheat,steeringwheelmemory,displayscreen,fulllcddashboard,
+		digitaldisplay,builtrecorder,activenoiserreduction,wirelesscharging
+		FROM car c,type t,series s
+		WHERE c.id=t.cid AND s.id=t.sid AND
+		tid=#{tId}
+	</select>
+	<update id="update" parameterType="Car">
+		UPDATE type SET leathersteeringwheel=#{leathersteeringwheel},steeringwheeladjustment=#{steeringwheeladjustment},
+		multifunctionals=#{multifunctionals},steeringwheelshift=#{steeringwheelshift},steeringwheelheat=#{steeringwheelheat},
+		steeringwheelmemory=#{steeringwheelmemory},displayscreen=#{displayscreen},fulllcddashboard=#{fulllcddashboard},
+		digitaldisplay=#{digitaldisplay},builtrecorder=#{builtrecorder},activenoiserreduction=#{activenoiserreduction},
+		wirelesscharging=#{wirelesscharging}
+		WHERE tid=#{tId}
+	</update>
+
+
+</mapper>

@@ -1,0 +1,44 @@
+
+
+@charset "utf-8";
+/* CSS Document */
+
+*{
+	margin:o;
+	padding:o;
+	font-size:18px;
+}
+
+/*body{
+	text-align:center;
+}
+*/
+
+.left img{
+	padding:10px 30px;
+}
+
+.right table{
+	text-align:center;
+	margin-top:40px auto;		
+}
+
+.right table td{
+	width:300px;
+	height:50px
+		
+}
+
+
+.logo_right{	
+	position: fixed; 
+	left:85%;
+	top:80%;
+
+}
+
+.logo_right img{
+	width:100px;
+	height:100px;
+}
+

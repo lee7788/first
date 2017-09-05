@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: commons-codec-1.6.jarDJNativeSwing.jarDJNativeSwing-SWT.jar
+

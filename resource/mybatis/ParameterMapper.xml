@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.machine.dao.BasicParameterDao">
+	<select id="listPage" parameterType="Integer" resultType="Car">
+		SELECT
+		tId,cName,ctype,cSeries,LEVEL,cTime_Market,cEngine,cTransmission,cVolume,cStructure
+		, cMax_Speed, officialAcceleration, measuredAcceleration,
+		actualBraking,integratedCoil,cOil,cVehicle_warranty,groundClearance
+		FROM TYPE t , car c, series s
+		WHERE c.id= t.cid AND s.id=t.sid
+		limit #{1},#{0}
+
+	</select>
+	<select id="listAll" resultType="Car">
+		SELECT tId, cName,ctype, cSeries, LEVEL, cTime_Market, cEngine,
+		cTransmission, cVolume, cStructure
+		, cMax_Speed, officialAcceleration, measuredAcceleration,
+		actualBraking, integratedCoil,cOil,cVehicle_warranty,groundClearance
+		FROM TYPE t , car c, series s
+		WHERE c.id= t.cid AND s.id=t.sid
+
+
+	</select>
+	<insert id="caradd" parameterType="Car" useGeneratedKeys="true"
+		keyProperty="cid">
+		insert into car (cName) values (#{cName})
+	</insert>
+	<insert id="typea">
+		insert into type (cid) values(#{0})
+
+	</insert>
+	<insert id="typeadd" parameterType="Car">
+		insert into type
+		(cid,sid,ctype,level,cTime_Market,cEngine,cTransmission,cVolume,cStructure
+		, cMax_Speed, officialAcceleration, measuredAcceleration,
+		actualBraking,integratedCoil,cOil,cVehicle_warranty,groundClearance)
+		values
+		(#{cid},#{sid},#{ctype},#{level},#{cTime_Market},#{cEngine},#{cTransmission},#{cVolume},#{cStructure},#{cMax_Speed},
+		#{officialacceleration},#{measuredacceleration},#{actualbraking},#{integratedcoil},#{cOil},#{cVehicle_warranty},#{groundclearance})
+	</insert>
+	 <select id="serchid" resultType="Car"  parameterType="Integer">
+   		SELECT tId, cName,ctype, cSeries, LEVEL, cTime_Market, cEngine,
+		cTransmission, cVolume, cStructure
+		, cMax_Speed, officialAcceleration, measuredAcceleration,
+		actualBraking, integratedCoil,cOil,cVehicle_warranty,groundClearance
+		FROM TYPE t , car c, series s
+		WHERE c.id= t.cid AND s.id=t.sid AND tId=#{tId}
+    </select>
+	
+	<update id="typeupdate" parameterType="Car">
+		update type set
+		cid=#{cid},sid=#{sid},ctype=#{ctype},level=#{level},cTime_Market=#{cTime_Market},cEngine=#{cEngine},cTransmission=#{cTransmission},
+		cVolume=#{cVolume},cStructure=#{cStructure},cMax_Speed=#{cMax_Speed},officialAcceleration=#{officialacceleration},measuredAcceleration=#{measuredacceleration},actualBraking=#{actualbraking},
+		integratedCoil=#{integratedcoil},cOil=#{cOil},cVehicle_warranty=#{cVehicle_warranty},groundClearance=#{groundclearance}
+		where tId=#{tId}
+	</update>
+	<delete id="delete1" parameterType="Car">
+		delete from type where tId=#{tId}
+
+	</delete>
+
+</mapper>

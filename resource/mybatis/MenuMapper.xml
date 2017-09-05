@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.machine.dao.MenuDao">
+
+	<resultMap id="BaseResultMap" type="cn.machine.pojo.Menu">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="path" jdbcType="VARCHAR" property="path" />
+		<result column="parent" jdbcType="INTEGER" property="parent" />
+		<result column="sort" jdbcType="INTEGER" property="sort" />
+	</resultMap>
+
+	<!-- 查询菜单 -->
+	<select id="list" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select m.* from r_menu_user r,s_menu m,t_user u
+		where r.userId=u.id and
+		r.menuId=m.id and r.userId=#{userId}
+		order by userId,menuId asc
+	</select>
+
+	<!-- 根据parent=0的id查询菜单 -->
+	<select id="findByParent" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from s_menu where parent=#{id}
+	</select>
+	<!-- 根据id的id查询菜单 -->
+	<select id="findById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select * from s_menu where id=#{id}
+	</select>
+
+	<!-- 查询所有 分页 -->
+	<select id="listPage" parameterType="cn.machine.pojo.Menu"
+		resultMap="BaseResultMap">
+		select * from s_menu limit #{1},#{0}
+	</select>
+
+	<!-- 查询所有 分页 -->
+	<select id="listAll" resultMap="BaseResultMap">
+		select * from s_menu
+	</select>
+	<resultMap id="ResultMap" type="cn.machine.pojo.GaoDe">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="profile" jdbcType="VARCHAR" property="profile" />
+		<result column="Qualifications" jdbcType="VARCHAR" property="Qualifications" />
+		<result column="Framework" jdbcType="VARCHAR" property="Framework" />
+		<result column="Culture" jdbcType="VARCHAR" property="Cultire" />
+	</resultMap>
+
+	<!-- 查询所有 分页 -->
+	<select id="listPage1" parameterType="cn.machine.pojo.GaoDe"
+		resultMap="ResultMap">
+		select * from gaode limit #{1},#{0}
+	</select>
+
+	<!-- 查询所有 分页 -->
+	<select id="listAll1" resultMap="ResultMap">
+		select * from gaode
+	</select>
+
+	<!-- 根据查询所有 数据 -->
+	<select id="addlist" resultMap="BaseResultMap">
+		select * from s_menu where
+		id=#{id}
+
+	</select>
+	<!--菜单管理添加 -->
+	<!-- <insert id="addMenu" parameterType="cn.machine.pojo.Menu"> -->
+	<!-- insert into s_menu (name,path,parent,sort)values(#{name},#{path},#{parent},#{sort}) -->
+
+	<!-- 按钮增加的 --><!--useGeneratedKeys="true" keyProperty="id"获取自增长的id -->
+	<insert id="addMenu" parameterType="cn.machine.pojo.Menu"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into s_menu (name,
+		path,
+		parent, sort)
+		values (
+		#{name,jdbcType=VARCHAR},
+		#{path,jdbcType=VARCHAR},
+		#{parent,jdbcType=INTEGER},
+		#{sort,jdbcType=INTEGER})
+	</insert>
+	<insert id="adduser">
+		insert into
+		r_menu_user(userId,menuId)values(#{0},#{1})
+	</insert>
+	<update id="update" parameterType="cn.machine.pojo.Menu">
+		update s_menu
+		set name = #{name,jdbcType=VARCHAR},
+		path = #{path,jdbcType=VARCHAR},
+		parent = #{parent,jdbcType=INTEGER},
+		sort = #{sort,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+
+	</update>
+
+	<!--菜单页面删除 -->
+	<delete id="delete" parameterType="cn.machine.pojo.Menu">
+		delete
+		from s_menu where id=#{id}
+	</delete>
+	<delete id="delete1">
+		delete from r_menu_user where menuId=#{0}
+	</delete>
+
+
+	<!--关于高德 表数据获取 -->
+	<select id="addserch" resultMap="ResultMap" parameterType="java.lang.Integer">
+		select * from gaode where id=#{id}
+
+	</select>
+	<!-- 关于高德 表数据更新 -->
+	<update id="updategaode">
+		update gaode set
+		profile=#{profile},Qualifications=#{qualifications},Framework=#{framework},Culture=#{cultire}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

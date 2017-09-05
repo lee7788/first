@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.machine.dao.AuxiliaryDao">
+
+
+	<!-- 查询所有 分页 -->
+	<select id="listPage" parameterType="Map" resultType="Car">
+		SELECT
+		tid,cName,cSeries,cType,vehicleradar,reversingvideoimages,panoramiccamera,cruisecontrol,
+		adaptivecruise,automaticparkingaccess,enginestartstop,hillstartassist,automaticparking,
+		gentleslopedescent,variablesuspension,airsuspension,electromagneticsuspension,
+		variablesteeringratio,differentiallock,centraldifferentiallock,
+		reardifferentiallock,overallactivesteering
+		 FROM car c,type t,series s
+		WHERE c.id=t.cid AND s.id=t.sid
+		limit #{offset},#{pageSize}
+	</select>
+
+	<!-- 查询所有 分页 -->
+	<select id="listAll" resultType="Car">
+		SELECT
+		tid,cName,cSeries,cType,vehicleradar,reversingvideoimages,panoramiccamera,cruisecontrol,
+		adaptivecruise,automaticparkingaccess,enginestartstop,hillstartassist,automaticparking,
+		gentleslopedescent,variablesuspension,airsuspension,electromagneticsuspension,
+		variablesteeringratio,differentiallock,centraldifferentiallock,
+		reardifferentiallock,overallactivesteering
+		 FROM car c,type t,series s
+		WHERE c.id=t.cid AND s.id=t.sid
+	</select>
+	
+
+	<select id="serchid" parameterType="int" resultType="Car">
+	   SELECT
+		tid,cName,cSeries,cType,vehicleradar,reversingvideoimages,panoramiccamera,cruisecontrol,
+		adaptivecruise,automaticparkingaccess,enginestartstop,hillstartassist,automaticparking,
+		gentleslopedescent,variablesuspension,airsuspension,electromagneticsuspension,
+		variablesteeringratio,differentiallock,centraldifferentiallock,
+		reardifferentiallock,overallactivesteering
+		FROM car c,type t,series s
+		WHERE c.id=t.cid AND s.id=t.sid AND
+		tid=#{tId}
+	</select>
+	<update id="update" parameterType="Car">
+		UPDATE type SET vehicleradar=#{vehicleradar},reversingvideoimages=#{reversingvideoimages},panoramiccamera=#{panoramiccamera},
+		cruisecontrol=#{cruisecontrol},	adaptivecruise=#{adaptivecruise},automaticparkingaccess=#{automaticparkingaccess},
+		enginestartstop=#{enginestartstop},hillstartassist=#{hillstartassist},automaticparking=#{automaticparking},
+		gentleslopedescent=#{gentleslopedescent},variablesuspension=#{variablesuspension},airsuspension=#{airsuspension},
+		electromagneticsuspension=#{electromagneticsuspension},	variablesteeringratio=#{variablesteeringratio},differentiallock=#{differentiallock},
+		centraldifferentiallock=#{centraldifferentiallock},	reardifferentiallock=#{reardifferentiallock},
+		overallactivesteering=#{overallactivesteering}
+		WHERE tid=#{tId}
+	</update>
+
+
+</mapper>

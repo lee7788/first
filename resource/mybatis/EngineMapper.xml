@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.machine.dao.EngineDao">
+	<select id="listPage" parameterType="Map" resultType="Car">
+	SELECT
+	tId,cName,ctype,cSeries,
+	displacement,
+	cAir_Intake,
+	Arrangement,
+	cNumber_Cylinders,
+	valveTrain,
+	compressionTatio,
+	valveTrain1,
+	Bore,
+	Trip,
+	cMaximum_Horsepower,
+	cMost_Powerful,
+	cMaximum_Torque,
+	cMaximum_Torque_Speed,
+	maximum_TorqueSpeed,
+	engineSpecificTechnology,
+	cCombustion_Form,
+	cFuel_Number,
+	cOil_Supply_Way,
+	cylinderHeadMaterial,
+	cylinderMaterial,
+	environmentalStandard
+	FROM TYPE t , car c, series s
+	WHERE c.id= t.cid AND s.id=t.sid
+	limit
+	#{offset},#{pageSize}
+
+	</select>
+	<select id="listAll" resultType="Car">
+		SELECT
+	tId,cName,ctype,cSeries,
+	displacement,
+	cAir_Intake,
+	Arrangement,
+	cNumber_Cylinders,
+	valveTrain,
+	compressionTatio,
+	valveTrain1,
+	Bore,
+	Trip,
+	cMaximum_Horsepower,
+	cMost_Powerful,
+	cMaximum_Torque,
+	cMaximum_Torque_Speed,
+	maximum_TorqueSpeed,
+	engineSpecificTechnology,
+	cCombustion_Form,
+	cFuel_Number,
+	cOil_Supply_Way,
+	cylinderHeadMaterial,
+	cylinderMaterial,
+	environmentalStandard
+	FROM TYPE t , car c, series s
+	WHERE c.id= t.cid AND s.id=t.sid
+	</select>
+		 <select id="serchid" resultType="Car"  parameterType="Integer">
+   		SELECT
+	tId,cName,ctype,cSeries,
+	displacement,
+	cAir_Intake,
+	Arrangement,
+	cNumber_Cylinders,
+	valveTrain,
+	compressionTatio,
+	valveTrain1,
+	Bore,
+	Trip,
+	cMaximum_Horsepower,
+	cMost_Powerful,
+	cMaximum_Torque,
+	cMaximum_Torque_Speed,
+	maximum_TorqueSpeed,
+	engineSpecificTechnology,
+	cCombustion_Form,
+	cFuel_Number,
+	cOil_Supply_Way,
+	cylinderHeadMaterial,
+	cylinderMaterial,
+	environmentalStandard
+	FROM TYPE t , car c, series s
+	WHERE c.id= t.cid AND s.id=t.sid AND tId=#{tId}
+    </select>
+    
+	<update id="typeupdate" parameterType="Car">
+		update type set
+		displacement=#{displacement},
+	cAir_Intake=#{cAir_Intake},	
+	Arrangement=#{arrangement},
+	cNumber_Cylinders=#{cNumber_Cylinders},
+	valveTrain=#{valvetrain},
+	compressionTatio=#{compressiontatio},
+	valveTrain1=#{valvetrain1},
+	Bore=#{bore},
+	Trip=#{trip},
+	cMaximum_Horsepower=#{cMaximum_Horsepower},
+	cMost_Powerful=#{cMost_Powerful},
+	cMaximum_Torque=#{cMaximum_Torque},
+	cMaximum_Torque_Speed=#{cMaximum_Torque_Speed},
+	maximum_TorqueSpeed=#{maximum_TorqueSpeed},
+	engineSpecificTechnology=#{engineSpecificTechnology},
+	cCombustion_Form=#{cCombustion_Form},
+	cFuel_Number=#{cFuel_Number},
+	cOil_Supply_Way=#{cOil_Supply_Way},
+	cylinderHeadMaterial=#{cylinderheadmaterial},
+	cylinderMaterial=#{cylindermaterial},
+	environmentalStandard=#{environmentalstandard}
+where tId=#{tId}
+	</update>
+</mapper>

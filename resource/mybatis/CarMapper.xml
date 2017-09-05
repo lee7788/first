@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.machine.dao.CarDao">
+
+ 
+	<select id="search"  parameterType="String" resultType="Car">
+	select c.cName,t.ctype,t.cVolume,t.cEngine,t.cOil
+	from car c ,type t
+	where c.id=t.cid and t.ctype=#{a3}
+	</select>
+	
+	<select id="carserch" parameterType="Integer" resultType="Car">
+    select *from car c inner join 
+    type t
+    on c.id= t.cid 
+	</select>
+	
+	<select id="searchPicture" parameterType="String" resultType="Picture">
+	select p.pPathName
+	from type t,picture p
+	where t.tid=p.tid and t.ctype=#{t.ctype}
+	</select>
+	
+    <select id="searchsuppiler" parameterType="String" resultType="Supplier">
+   	select s.sName,s.sAddress,c.cPrice
+	from supplier s
+	inner join 
+	car_information c 
+	on s.sId=c.cSupplier
+	inner join 
+	type t
+	on t.tId = c.cType
+	where t.ctype=#{t.ctype}   
+    </select>
+    
+    
+   <!--  <select id="listPage" parameterType="Integer" resultType="Car">
+    select *from car c  inner join 
+    type t
+    on c.id= t.cid
+    limit #{1},#{0}
+    
+    </select>
+      <select id="listAll"  resultType="Car">
+    select *from car c inner join 
+    type t
+    on c.id= t.cid 
+    </select>
+    <insert id="caradd"    parameterType="Car"
+		useGeneratedKeys="true" keyProperty="cid">
+    insert into car (cName) values (#{cName})
+    </insert>
+    <insert id="typea">
+    insert into type (cid) values(#{0})
+    
+    </insert>
+   <insert id="typeadd"  parameterType="Car" >
+
+    insert into type (ctype,cTime_Market ,cEngine ,cTransmission,cColor ,cVolume,cWheelbase, cTank_Volume  ,cLuggage_Space,cStructure ,cMax_Speed ,cVehicle_warranty ,cAir_Intake ,cNumber_Cylinders,cMaximum_Horsepower ,cMost_Powerful,cMaximum_Torque ,cMaximum_Torque_Speed,cCombustion_Form ,cFuel_Number ,cOil_Supply_Way,cGear_Number,cType_Gearbox  ,cOil  )
+    values (#{ctype},#{cTime_Market},#{cEngine},#{cTransmission},#{cColor},#{cVolume},#{cWheelbase},#{cTank_Volume},#{cLuggage_Space},#{cStructure},#{cMax_Speed},#{cVehicle_warranty},#{cAir_Intake},#{cNumber_Cylinders},#{cMaximum_Horsepower},#{cMost_Powerful},#{cMaximum_Torque},#{cMaximum_Torque_Speed},#{cCombustion_Form},#{cFuel_Number},#{cOil_Supply_Way},#{cGear_Number},#{cType_Gearbox},#{cOil})
+
+    </insert>
+    <update id="carupdate"  parameterType="Car">
+    update car set cName =#{cName}
+    where id=#{id}
+    </update>
+    <update id="typeupdate" parameterType="Car">
+    update  type set cid=#{cid},ctype=#{ctype},cTime_Market=#{cTime_Market},cEngine=#{cEngine},cTransmission=#{cTransmission},
+    cColor=#{cColor},cVolume=#{cVolume},cWheelbase=#{cWheelbase},cTank_Volume=#{cTank_Volume},cLuggage_Space=#{cLuggage_Space},cStructure=#{cStructure},cMax_Speed=#{cMax_Speed},cVehicle_warranty=#{cVehicle_warranty},cAir_Intake=#{cAir_Intake},cNumber_Cylinders=#{cNumber_Cylinders},cMaximum_Horsepower=#{cMaximum_Horsepower},cMost_Powerful=#{cMost_Powerful},cMaximum_Torque=#{cMaximum_Torque},cMaximum_Torque_Speed=#{cMaximum_Torque_Speed},cCombustion_Form=#{cCombustion_Form},cFuel_Number=#{cFuel_Number},cOil_Supply_Way=#{cOil_Supply_Way},cGear_Number=#{cGear_Number},cType_Gearbox=#{cType_Gearbox},cOil=#{cOil}
+    where tId=#{tId}
+    </update>
+    <select id="serchid" resultType="Car"  parameterType="Integer">
+    SELECT t.*,c.`cName` FROM  TYPE t  INNER JOIN 
+    car c
+    ON t.cid= c.id WHERE tId=#{tId}
+    </select>
+
+   <delete id="delete1"  parameterType="Car">
+   delete from type  where tId=#{tId}
+   
+   </delete> -->
+
+</mapper>

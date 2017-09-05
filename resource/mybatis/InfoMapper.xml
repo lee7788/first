@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.machine.dao.InformationDao">
+
+	<!-- <resultMap id="BaseResultMap" type="cn.machine.pojo.Menu"> <id column="id" 
+		jdbcType="INTEGER" property="id" /> <result column="name" jdbcType="VARCHAR" 
+		property="name" /> <result column="path" jdbcType="VARCHAR" property="path" 
+		/> <result column="parent" jdbcType="INTEGER" property="parent" /> <result 
+		column="sort" jdbcType="INTEGER" property="sort" /> </resultMap> -->
+
+
+	<!-- 查询所有 分页 -->
+	<select id="listPage" parameterType="Map" resultType="Info">
+		select
+		i.id,c.cName,s.cSeries,t.ctype,u.name from
+		car_information i,type
+		t,t_user u,car c,series s
+		WHERE i.cName=c.id AND
+		i.cType = t.tId AND
+		i.cSeries=s.id and
+		i.cSupplier = u.id limit #{offset},#{pageSize}
+
+
+	</select>
+
+	<!-- 查询所有 分页 -->
+	<select id="listAll" resultType="Info">
+		select
+		i.id,c.cName,s.cSeries,t.ctype,u.name from
+		car_information i,type
+		t,t_user u,car c,series s
+		WHERE i.cName=c.id AND
+		i.cType = t.tId AND
+		i.cSeries=s.id and
+		i.cSupplier = u.id
+
+	</select>
+	<select id="showAll" resultType="User">
+		SELECT id,name FROM t_user
+	</select>
+	<select id="showAll1" resultType="CarBrand">
+		SELECT id,cName FROM car
+	</select>
+	<select id="showAll2" resultType="Car">
+		SELECT tid,ctype FROM type
+	</select>
+	<select id="showAll3" resultType="Series">
+		SELECT * FROM series
+	</select>
+
+	<select id="findById" parameterType="int" resultType="Info">
+		select
+		i.id,c.cName,s.cSeries,t.ctype,u.name from
+		car_information i,type
+		t,t_user u,car c,series s
+		WHERE i.cName=c.id AND
+		i.cType = t.tId AND
+		i.cSeries=s.id AND
+		i.cSupplier = u.id AND
+		i.id=#{id}
+	</select>
+	<update id="update" parameterType="Info">
+		UPDATE car_information SET
+		cSupplier=#{cSupplier}
+		WHERE id=#{id}
+	</update>
+	
+	<insert id="add" parameterType="Info" useGeneratedKeys="true" keyProperty="id">
+		INSERT car_information (cName,cSeries,cType,cSupplier)
+		VALUE (#{cName},#{cSeries},#{cType},#{cSupplier})
+	</insert>
+	
+	<delete id="delete" parameterType="Info">
+    delete from car_information where id=#{id}
+   </delete>
+
+</mapper>
